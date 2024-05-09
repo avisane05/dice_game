@@ -21,21 +21,27 @@ while True:
 max_score = 50
 player_scores = [0 for _ in range(players)]
 
-while max(player_scores) < max_score:
+while max(player_scores) <= max_score:
 
     for player_idx in range(players):
-        print("\nPlayer", player_idx + 1, "turen has just started!\n")
+
+        print("\n######################################################################################")
+        
+        print("\nPlayer", player_idx + 1, "turen has just started!")
+        print("Your total score is:", player_scores[player_idx], "\n")
+        
         currunt_score = 0
         
         while True:
-            should_roll = input("Would you like to roll (y): ").lower()
+
+            should_roll = input("\nPlayer " + str(player_idx + 1) + " would you like to roll (y): ").lower()
             if should_roll != "y":
                 break
             
             roll_val = roll()
 
             if roll_val == 1:
-                print("You rolled a 1! Turn done!")
+                print("\nYou rolled a 1! Turn done!")
                 currunt_score = 0
                 break
             else:
@@ -43,7 +49,16 @@ while max(player_scores) < max_score:
                 print("You rolled a:", roll_val)
 
             print("Your score is:", currunt_score)
-        
+
         player_scores[player_idx] += currunt_score
         print("Your total score is:", player_scores[player_idx])
 
+        if max(player_scores) >= max_score:
+                break
+
+max_score = max(player_scores)
+winning_idx = player_scores.index(max_score)
+
+print("\n#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*\n")
+
+print("Player", winning_idx + 1, "is the winner with the score of:", max_score)
